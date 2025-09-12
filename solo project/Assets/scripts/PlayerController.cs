@@ -31,18 +31,19 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
 
-    void Update()
+    private void Update()
     {
-            //Camera Handle
-            playerCam.transform.position = transform.position + cameraOffset;
+        //Camera Handle
+        //playerCam.transform.position = transform.position + cameraOffset;
+        // cameraRotation.x += lookAxis.ReadValue<Vector2>().x * Xsensitivity;
+        // cameraRotation.y += lookAxis.ReadValue<Vector2>().y * Ysensitivity;
+        //cameraRotation.y = Mathf.Clamp(cameraRotation.y, -calculationLimit, calculationLimit);
+        //playerCam.transform.rotation = Quaternion.Euler(-cameraRotation.y, cameraRotation.x, 0);
 
-            cameraRotation.x += lookAxis.ReadValue<Vector2>().x * Xsensitivity;
-            cameraRotation.y += lookAxis.ReadValue<Vector2>().y * Ysensitivity;
-
-        cameraRotation.y = Mathf.Clamp(cameraRotation.y, -calculationLimit, calculationLimit);
-
-            playerCam.transform.rotation = Quaternion.Euler(-cameraRotation.y, cameraRotation.x, 0);
-            transform.rotation = Quaternion.AngleAxis(cameraRotation.x, Vector3.up);
+        Quaternion playerRotation = Quaternion.identity;
+        playerRotation.y = playerCam.transform.rotation.y;
+        playerRotation.w = playerCam.transform.rotation.w;
+        transform.rotation = playerRotation; 
         //Movement System
 
 
