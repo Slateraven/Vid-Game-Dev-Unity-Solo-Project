@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     InputAction lookAxis; 
     public Rigidbody rb;
 
+    Ray jumpRay;
+
     float inputX;
     float inputY;
 
@@ -16,11 +18,14 @@ public class PlayerController : MonoBehaviour
     public float Ysensitivity = .1f;
 
     public float speed = 5f;
+    public float jumpHeight = 10f;
+    public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        jumpRay = new Ray(transform.position, -transform.up);
         rb = GetComponent<Rigidbody>();
         playerCam = Camera.main;
         lookAxis = GetComponent<PlayerInput>().currentActionMap.FindAction("Look");
@@ -43,9 +48,12 @@ public class PlayerController : MonoBehaviour
         Quaternion playerRotation = Quaternion.identity;
         playerRotation.y = playerCam.transform.rotation.y;
         playerRotation.w = playerCam.transform.rotation.w;
-        transform.rotation = playerRotation; 
-        //Movement System
+        transform.rotation = playerRotation;
 
+        jumpRay.origin = transform.position;
+        jumpRay.direction = -transform.up;
+        
+        //Movement System
 
         Vector3 tempMove = rb.linearVelocity;
 
@@ -62,5 +70,9 @@ public class PlayerController : MonoBehaviour
         inputX=InputAxis.x;
         inputY=InputAxis.y;
     }
-
+    public void Jump()
+    {
+        if (Physics.Raycast(jumpRay, jumpRayDistance))
+            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+    }
 }
