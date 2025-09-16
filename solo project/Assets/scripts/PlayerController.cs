@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
 
+    public int health = 5;
+    public int maxHealth = 5;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -39,11 +42,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //Camera Handle
-        //playerCam.transform.position = transform.position + cameraOffset;
-        // cameraRotation.x += lookAxis.ReadValue<Vector2>().x * Xsensitivity;
-        // cameraRotation.y += lookAxis.ReadValue<Vector2>().y * Ysensitivity;
-        //cameraRotation.y = Mathf.Clamp(cameraRotation.y, -calculationLimit, calculationLimit);
-        //playerCam.transform.rotation = Quaternion.Euler(-cameraRotation.y, cameraRotation.x, 0);
+        
+        if (health <= 0)
+
 
         Quaternion playerRotation = Quaternion.identity;
         playerRotation.y = playerCam.transform.rotation.y;
