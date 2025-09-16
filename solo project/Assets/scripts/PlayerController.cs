@@ -85,4 +85,9 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(jumpRay, jumpRayDistance))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        health = 0;
+    }
 }
