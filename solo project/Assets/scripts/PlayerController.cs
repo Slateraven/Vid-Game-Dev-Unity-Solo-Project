@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,11 +43,19 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //Camera Handle
-        
+        //playerCam.transform.position = transform.position + cameraOffset;
+        // cameraRotation.x += lookAxis.ReadValue<Vector2>().x * Xsensitivity;
+        // cameraRotation.y += lookAxis.ReadValue<Vector2>().y * Ysensitivity;
+        //cameraRotation.y = Mathf.Clamp(cameraRotation.y, -calculationLimit, calculationLimit);
+        //playerCam.transform.rotation = Quaternion.Euler(-cameraRotation.y, cameraRotation.x, 0);
+
         if (health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        }
 
 
-        Quaternion playerRotation = Quaternion.identity;
+            Quaternion playerRotation = Quaternion.identity;
         playerRotation.y = playerCam.transform.rotation.y;
         playerRotation.w = playerCam.transform.rotation.w;
         transform.rotation = playerRotation;
