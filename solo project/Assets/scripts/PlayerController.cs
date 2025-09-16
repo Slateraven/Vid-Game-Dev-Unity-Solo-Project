@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float Ysensitivity = .1f;
 
     public float speed = 5f;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 5f;
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
 
