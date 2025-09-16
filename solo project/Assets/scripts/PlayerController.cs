@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     Vector3 cameraOffset = new Vector3(0, .5f, 2f);
     Vector2 cameraRotation = Vector2.zero;
     Camera playerCam;
-    InputAction lookAxis; 
+    InputAction lookAxis;
     public Rigidbody rb;
 
     Ray jumpRay;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float Ysensitivity = .1f;
 
     public float speed = 5f;
-    public float jumpHeight = 10f;
+    public float jumpHeight = 3f;
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
 
@@ -51,23 +51,23 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
 
-            Quaternion playerRotation = Quaternion.identity;
+        Quaternion playerRotation = Quaternion.identity;
         playerRotation.y = playerCam.transform.rotation.y;
         playerRotation.w = playerCam.transform.rotation.w;
         transform.rotation = playerRotation;
 
         jumpRay.origin = transform.position;
         jumpRay.direction = -transform.up;
-        
+
         //Movement System
 
         Vector3 tempMove = rb.linearVelocity;
 
-        tempMove.x = inputY * speed; 
+        tempMove.x = inputY * speed;
         tempMove.z = inputX * speed;
 
         rb.linearVelocity = (tempMove.x * transform.forward) + (tempMove.y * transform.up) + (tempMove.z * transform.right);
@@ -77,8 +77,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 InputAxis = context.ReadValue<Vector2>();
 
-        inputX=InputAxis.x;
-        inputY=InputAxis.y;
+        inputX = InputAxis.x;
+        inputY = InputAxis.y;
     }
     public void Jump()
     {
@@ -88,6 +88,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        health = 0;
+        if (other.tag == "killzone")
+        {
+            health = 0;
+        }
+
+        if ((other.tag == "health") && (health < maxHealth))
+        {
+            health++;
+            Destroy(other.gameObject);
+
+            //other.gameObject.SetActive(false);
+            //Above is if I want to do temporary object, then it comes back 
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "dielol")
+        {
+            health--;
+        }
     }
 }
