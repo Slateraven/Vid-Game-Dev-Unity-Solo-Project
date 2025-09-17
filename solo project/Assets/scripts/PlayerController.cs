@@ -103,12 +103,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.gameObject.tag == "dielol")
+        print (collision.gameObject.name);
+        if (collision.gameObject.tag == "enemy")
+        {
+            health--;
+        }
+        if (collision.gameObject.tag == "murber")
         {
             health--;
         }
     }
+
+
+
 }
