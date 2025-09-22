@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     float inputX;
     float inputY;
+    
 
     public float Xsensitivity = .1f;
     public float Ysensitivity = .1f;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 5f;
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
+    public float ladderForce;
 
     public int health = 5;
     public int maxHealth = 5;
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
         tempMove.x = inputY * speed;
         tempMove.z = inputX * speed;
 
-        rb.linearVelocity = (tempMove.x * transform.forward) + (tempMove.y * transform.up) + (tempMove.z * transform.right);
+        rb.linearVelocity = (tempMove.x * transform.forward) + (tempMove.y * ladderForce * transform.up) + (tempMove.z * transform.right);
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -101,6 +103,7 @@ public class PlayerController : MonoBehaviour
             //other.gameObject.SetActive(false);
             //Above is if I want to do temporary object, then it comes back 
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -114,8 +117,24 @@ public class PlayerController : MonoBehaviour
         {
             health--;
         }
+
+        if (collision.gameObject.tag == "ladder")
+        {
+            print("ladder hit");
+            ladderForce = 2f;
+
+        }
+
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "ladder")
+        {
+            ladderForce = 1f;
 
-
+        }
+    }
+       
+ 
 
 }
