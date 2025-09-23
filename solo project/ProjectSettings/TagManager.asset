@@ -9,6 +9,8 @@ TagManager:
   - enemy
   - murber
   - ladder
+  - projectile
+  - weapon
   layers:
   - Default
   - TransparentFX
