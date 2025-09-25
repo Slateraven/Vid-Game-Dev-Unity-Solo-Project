@@ -11,6 +11,8 @@ TagManager:
   - ladder
   - projectile
   - weapon
+  - ui health
+  - reset
   layers:
   - Default
   - TransparentFX
