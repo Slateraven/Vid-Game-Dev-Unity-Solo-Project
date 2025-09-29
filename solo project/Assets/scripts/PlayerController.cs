@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     public bool attacking = false;
     public bool climbing = false;
 
+    public GameObject resetBlock;
+    public GameObject moveBlock; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -200,6 +203,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "ladder")
         {
             climbing = true;
+        }
+        if (collision.gameObject.tag == "reset")
+        {
+            moveBlock.transform.position = resetBlock.transform.position; 
         }
 
     }

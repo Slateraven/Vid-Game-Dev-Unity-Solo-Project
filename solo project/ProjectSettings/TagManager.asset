@@ -13,6 +13,7 @@ TagManager:
   - weapon
   - ui health
   - reset
+  - ui_pause
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     PlayerController player;
@@ -24,15 +23,15 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-            weaponUI = GameObject.FindGameObjectWithTag("weaponUI");
+            //weaponUI = GameObject.FindGameObjectWithTag("weaponUI");
             pauseMenu = GameObject.FindGameObjectWithTag("ui_pause");
 
             pauseMenu.SetActive(false);
 
-            healthBar = GameObject.FindGameObjectWithTag("ui_health").GetComponent<Image>();
-            ammoCounter = GameObject.FindGameObjectWithTag("ui_ammo").GetComponent<TextMeshProUGUI>();
-            clip = GameObject.FindGameObjectWithTag("ui_clip").GetComponent<TextMeshProUGUI>();
-            fireMode = GameObject.FindGameObjectWithTag("ui_fireMode").GetComponent<TextMeshProUGUI>();
+            healthBar = GameObject.FindGameObjectWithTag("ui health").GetComponent<Image>();
+            //ammoCounter = GameObject.FindGameObjectWithTag("ui_ammo").GetComponent<TextMeshProUGUI>();
+            //clip = GameObject.FindGameObjectWithTag("ui_clip").GetComponent<TextMeshProUGUI>();
+            //fireMode = GameObject.FindGameObjectWithTag("ui_fireMode").GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -42,43 +41,6 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex >= 1)
         {
             healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
-
-            if (player.currentWeapon != null)
-            {
-                weaponUI.SetActive(true);
-
-                ammoCounter.text = "Ammo: " + player.currentWeapon.ammo;
-                clip.text = "Clip: " + player.currentWeapon.clip + " / " + player.currentWeapon.clipSize;
-
-                if (player.currentWeapon.fireModes >= 2)
-                {
-                    fireMode.gameObject.SetActive(true);
-
-                    switch (player.currentWeapon.weaponID)
-                    {
-                        case 1:
-                            {
-                                if (player.currentWeapon.currentFireMode == 0)
-                                    fireMode.text = "Fire Mode: Semi-Auto";
-
-                                else if (player.currentWeapon.currentFireMode == 1)
-                                    fireMode.text = "Fire Mode: Full Auto";
-
-                                break;
-                            }
-
-                        default:
-                            fireMode.gameObject.SetActive(false);
-                            break;
-                    }
-                }
-
-                else
-                    fireMode.gameObject.SetActive(false);
-            }
-
-            else
-                weaponUI.SetActive(false);
         }
     }
 
