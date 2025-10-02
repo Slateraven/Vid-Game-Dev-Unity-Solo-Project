@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
     public float interactDistance = 1f; 
-
+    
     public int health = 5;
     public int maxHealth = 5;
 
@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
     public bool climbing = false;
 
     public GameObject resetBlock;
-    public GameObject moveBlock; 
+    public GameObject moveBlock;
+
+    public int key = 0; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -209,6 +211,16 @@ public class PlayerController : MonoBehaviour
             moveBlock.transform.position = resetBlock.transform.position; 
         }
 
+        if (collision.gameObject.tag == "key")
+        {
+            key += 1;
+            Destroy(collision.gameObject);
+        }
+        if ((key ==1) && collision.gameObject.tag == "door")
+        {
+            Destroy (collision.gameObject);
+            key = 0;
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
