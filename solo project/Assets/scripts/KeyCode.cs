@@ -169,5 +169,8 @@ public class KeyCode : MonoBehaviour
         escPressed = true;
     }
 
-
+    public void FPress()
+    {
+        fPressed = true;
     }
+}
