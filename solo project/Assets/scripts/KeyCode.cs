@@ -18,7 +18,10 @@ public class KeyCode : MonoBehaviour
     public Button but1, but2, but3, but4, but5, but6, but7, but8, but9, but0;
     int token = 0;
     public Rigidbody rb;
-    public bool dooractive; 
+    public bool dooractive;
+
+    
+
 
     void OnTriggerStay(Collider other)
     {
@@ -46,7 +49,7 @@ public class KeyCode : MonoBehaviour
     {
         if (interactable == true)
         {
-            if (input.actions.F)
+           // if (input.actions.F)
             {
                 
                 doorcode.SetActive(true);
@@ -60,9 +63,9 @@ public class KeyCode : MonoBehaviour
         }
         if (dooractive == true)
         {
-            if (escPressed)
+            //if (escPressed)
             {
-            escPressed = false;
+           // escPressed = false;
                 numtext.SetActive(true);
                 correcttext.SetActive(false);
                 incorrecttext.SetActive(false);
@@ -166,11 +169,11 @@ public class KeyCode : MonoBehaviour
     }
     public void EscPress()
     {
-        escPressed = true;
+        //escPressed = true;
     }
 
     public void FPress()
     {
-        fPressed = true;
+       // fPressed = true;
     }
 }

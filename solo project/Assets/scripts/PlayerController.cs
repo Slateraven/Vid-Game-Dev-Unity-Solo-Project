@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour
     public GameObject resetBlock;
     public GameObject moveBlock;
 
-    public int key = 0; 
+    public int key = 0;
+
+    public AudioSource speakers;
+
+    public AudioClip[] SFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -171,6 +175,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(jumpRay, jumpRayDistance))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+
+        speakers.resource = SFX[0];
+        speakers.Play();
     }
 
     private void OnTriggerEnter(Collider other)

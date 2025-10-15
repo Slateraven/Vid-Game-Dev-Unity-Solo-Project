@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using JetBrains.Annotations;
 public class GameManager : MonoBehaviour
 {
     PlayerController player;
@@ -17,8 +18,16 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public AudioSource speakers;
+    public AudioClip menu;
+    public AudioClip bg; 
+    
+    
     void Start()
     {
+
+
         if (SceneManager.GetActiveScene().buildIndex >= 1)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -32,15 +41,24 @@ public class GameManager : MonoBehaviour
             //ammoCounter = GameObject.FindGameObjectWithTag("ui_ammo").GetComponent<TextMeshProUGUI>();
             //clip = GameObject.FindGameObjectWithTag("ui_clip").GetComponent<TextMeshProUGUI>();
             //fireMode = GameObject.FindGameObjectWithTag("ui_fireMode").GetComponent<TextMeshProUGUI>();
-        }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (SceneManager.GetActiveScene().buildIndex >= 1)
+            speakers.resource = bg;
+            speakers.Play();
+        }
+        else
         {
-            healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
+            speakers.resource = menu;
+            speakers.Play();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (SceneManager.GetActiveScene().buildIndex >= 1)
+            {
+                healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
+                
+            }
         }
     }
 
@@ -79,10 +97,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(level);
+        
     }
     public void MainMenu()
     {
         LoadLevel(0);
+        
     }
     public void QuitGame()
     {
