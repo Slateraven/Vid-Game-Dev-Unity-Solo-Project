@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public AudioSource speakers;
+    public AudioSource speaker;
     public AudioClip menu;
     public AudioClip bg; 
     
@@ -42,24 +42,24 @@ public class GameManager : MonoBehaviour
             //clip = GameObject.FindGameObjectWithTag("ui_clip").GetComponent<TextMeshProUGUI>();
             //fireMode = GameObject.FindGameObjectWithTag("ui_fireMode").GetComponent<TextMeshProUGUI>();
 
-            speakers.resource = bg;
-            speakers.Play();
+            speaker.resource = bg;
+            speaker.Play();
         }
         else
         {
-            speakers.resource = menu;
-            speakers.Play();
+            speaker.resource = menu;
+            speaker.Play();
         }
 
         // Update is called once per frame
         void Update()
-        {
-            if (SceneManager.GetActiveScene().buildIndex >= 1)
             {
-                healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
-                
+                if (SceneManager.GetActiveScene().buildIndex >= 1)
+                {
+                    healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
+
+                }
             }
-        }
     }
 
     public void Pause()

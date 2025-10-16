@@ -31,7 +31,9 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 5f;
     public float jumpRayDistance = 1.1f;
     public float calculationLimit = 90;
-    public float interactDistance = 1f; 
+    public float interactDistance = 1f;
+
+    public bool grounded; 
     
     public int health = 5;
     public int maxHealth = 5;
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     public int key = 0;
 
-    public AudioSource speakers;
+    public AudioSource speaker2;
 
     public AudioClip[] SFX;
 
@@ -79,8 +81,18 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+        if (Physics.Raycast(jumpRay, jumpRayDistance))
+        {
+            grounded = true; 
+        }
+        else
+        {
+            grounded = false;
+        }
 
-        Quaternion playerRotation = Quaternion.identity;
+
+
+            Quaternion playerRotation = Quaternion.identity;
         playerRotation.y = playerCam.transform.rotation.y;
         playerRotation.w = playerCam.transform.rotation.w;
         transform.rotation = playerRotation;
@@ -170,14 +182,29 @@ public class PlayerController : MonoBehaviour
 
         inputX = InputAxis.x;
         inputY = InputAxis.y;
-    }
-    public void Jump()
-    {
-        if (Physics.Raycast(jumpRay, jumpRayDistance))
-            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+        speaker2.resource = SFX[0];
+        if (inputX ==0 && inputY == 0)
+        {
+            speaker2.loop = false;
+        }
+        else
+        speaker2.loop = true;
+        speaker2.Play();
 
-        speakers.resource = SFX[0];
-        speakers.Play();
+    }
+    public void Jump(InputAction.CallbackContext phase)
+    {
+        if (grounded)
+        {
+            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+            if (phase.started)
+            {
+
+
+                speaker2.resource = SFX[1];
+                speaker2.Play();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -185,12 +212,16 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "killzone")
         {
             health = 0;
+            speaker2.resource = SFX[3];
+            speaker2.Play();
         }
 
         if ((other.tag == "health") && (health < maxHealth))
         {
             health++;
             Destroy(other.gameObject);
+            speaker2.resource = SFX[4];
+            speaker2.Play();
 
             //other.gameObject.SetActive(false);
             //Above is if I want to do temporary object, then it comes back 
@@ -204,10 +235,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "enemy")
         {
             health--;
+            speaker2.resource = SFX[2];
+            speaker2.Play();
         }
         if (collision.gameObject.tag == "murber")
         {
             health--;
+            speaker2.resource = SFX[2];
+            speaker2.Play();
         }
         if (collision.gameObject.tag == "ladder")
         {
@@ -222,6 +257,8 @@ public class PlayerController : MonoBehaviour
         {
             key += 1;
             Destroy(collision.gameObject);
+            speaker2.resource = SFX[5];
+            speaker2.Play();
         }
         if ((key ==1) && collision.gameObject.tag == "door")
         {
