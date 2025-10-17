@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public int key = 0;
 
     public AudioSource speaker2;
+    public AudioSource speakerWalk; 
 
     public AudioClip[] SFX;
 
@@ -182,14 +183,15 @@ public class PlayerController : MonoBehaviour
 
         inputX = InputAxis.x;
         inputY = InputAxis.y;
-        speaker2.resource = SFX[0];
+        speakerWalk.resource = SFX[0];
         if (inputX ==0 && inputY == 0)
         {
-            speaker2.loop = false;
+            speakerWalk.loop = false;
         }
         else
-        speaker2.loop = true;
-        speaker2.Play();
+        speakerWalk.loop = true;
+        speakerWalk.Play();
+
 
     }
     public void Jump(InputAction.CallbackContext phase)
@@ -231,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print (collision.gameObject.name);
+        
         if (collision.gameObject.tag == "enemy")
         {
             health--;

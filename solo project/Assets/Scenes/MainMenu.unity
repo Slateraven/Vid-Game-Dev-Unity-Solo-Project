@@ -1404,8 +1404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
-  speakers: {fileID: 0}
-  speaker2: {fileID: 2147179707}
+  speaker: {fileID: 0}
   menu: {fileID: 8300000, guid: 02a9bfbbc1dd1bf479ef4d5de639db05, type: 3}
   bg: {fileID: 0}
 --- !u!4 &2146513530
@@ -1527,7 +1526,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 02a9bfbbc1dd1bf479ef4d5de639db05, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.506
   m_Pitch: 1

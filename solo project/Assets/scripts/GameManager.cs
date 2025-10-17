@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 
     public AudioSource speaker;
     public AudioClip menu;
-    public AudioClip bg; 
-    
-    
+    public AudioClip bg;
+
+
     void Start()
     {
 
@@ -51,16 +51,20 @@ public class GameManager : MonoBehaviour
             speaker.Play();
         }
 
-        // Update is called once per frame
-        void Update()
-            {
-                if (SceneManager.GetActiveScene().buildIndex >= 1)
-                {
-                    healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
-
-                }
-            }
+       
     }
+
+    // Update is called once per frame
+    void Update()
+
+    {
+        if (SceneManager.GetActiveScene().buildIndex >= 1)
+        {
+            healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
+
+        }
+    }
+
 
     public void Pause()
     {
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(true);
 
             Time.timeScale = 0;
+            AudioListener.pause = true;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -88,6 +93,7 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(false);
 
             Time.timeScale = 1;
+            AudioListener.pause = false;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

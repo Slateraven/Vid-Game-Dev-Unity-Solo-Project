@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.InputSystem;
+using TMPro;
 
 
 public class KeyCode : MonoBehaviour
@@ -11,7 +12,7 @@ public class KeyCode : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject doorcode, numtext, incorrecttext, correcttext;
     public PlayerController playerscript;
-    public Text numTex;
+    public TextMeshProUGUI numTex;
     public string codeString, correctCode;
     public int stringCharacters = 0;
     public bool interactable, codeDone;
@@ -21,7 +22,8 @@ public class KeyCode : MonoBehaviour
     public bool dooractive;
 
     
-
+    //EMBRACE THE VOID
+    
 
     void OnTriggerStay(Collider other)
     {
@@ -43,15 +45,15 @@ public class KeyCode : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
     void Update()
     {
         if (interactable == true)
         {
-           // if (input.actions.F)
+            /* if (Input.GetKeyDown(UnityEngine.KeyCode.F))
             {
-                
+                Debug.Log("beep"); 
                 doorcode.SetActive(true);
   
                 playerscript.enabled = false;
@@ -59,13 +61,15 @@ public class KeyCode : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 interactable = false;
+          
             }
+            */
+        
         }
         if (dooractive == true)
         {
-            //if (escPressed)
+            if (Input.GetKeyDown(UnityEngine.KeyCode.Escape))
             {
-           // escPressed = false;
                 numtext.SetActive(true);
                 correcttext.SetActive(false);
                 incorrecttext.SetActive(false);
@@ -83,7 +87,7 @@ public class KeyCode : MonoBehaviour
                 but8.interactable = true;
                 but9.interactable = true;
                 but0.interactable = true;
-                doorcode.SetActive(false);
+                //doorcode.SetActive(false);
                 playerscript.enabled = true;
                 interactable = false;
                 Cursor.visible = false;
@@ -109,7 +113,6 @@ public class KeyCode : MonoBehaviour
                     codeDone = true;
                     if (token == 0)
                     {
-                        //doorOpen.SetTrigger("open");
                         StartCoroutine(endSesh());
                         token = 1;
                     }
@@ -167,13 +170,25 @@ public class KeyCode : MonoBehaviour
         codeString = codeString + "" + newNum;
         stringCharacters = stringCharacters ++;
     }
-    public void EscPress()
+    
+    public void onInteract(InputAction.CallbackContext context)
     {
-        //escPressed = true;
+        
+
+        /*if (context.performed)
+        {
+        */
+         Debug.Log("beep");
+         doorcode.SetActive(true);
+
+         playerscript.enabled = false;
+         dooractive = true;
+         Cursor.visible = true;
+         Cursor.lockState = CursorLockMode.None;
+         interactable = false;
+        //}
+        
+
     }
 
-    public void FPress()
-    {
-       // fPressed = true;
-    }
 }
