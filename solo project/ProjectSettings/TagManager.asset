@@ -17,6 +17,7 @@ TagManager:
   - key
   - door
   - proj
+  - exit
   layers:
   - Default
   - TransparentFX

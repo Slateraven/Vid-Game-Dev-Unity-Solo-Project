@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using TMPro;
 
+//EMBRACE THE VOID NERDS
 
 public class KeyCode : MonoBehaviour
 {
@@ -20,10 +21,11 @@ public class KeyCode : MonoBehaviour
     int token = 0;
     public Rigidbody rb;
     public bool dooractive;
+    public GameObject exit;
 
-    
-    //EMBRACE THE VOID
-    
+    public AudioClip[] SFX;
+
+    public AudioSource speaker2;
 
     void OnTriggerStay(Collider other)
     {
@@ -45,29 +47,14 @@ public class KeyCode : MonoBehaviour
 
     private void Start()
     {
-
+       
     }
     void Update()
     {
-        if (interactable == true)
-        {
-            /* if (Input.GetKeyDown(UnityEngine.KeyCode.F))
-            {
-                Debug.Log("beep"); 
-                doorcode.SetActive(true);
-  
-                playerscript.enabled = false;
-                dooractive = true;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                interactable = false;
-          
-            }
-            */
         
-        }
         if (dooractive == true)
         {
+            exit.SetActive (false);
             if (Input.GetKeyDown(UnityEngine.KeyCode.Escape))
             {
                 numtext.SetActive(true);
@@ -87,7 +74,7 @@ public class KeyCode : MonoBehaviour
                 but8.interactable = true;
                 but9.interactable = true;
                 but0.interactable = true;
-                //doorcode.SetActive(false);
+                doorcode.SetActive(false);
                 playerscript.enabled = true;
                 interactable = false;
                 Cursor.visible = false;
@@ -96,6 +83,7 @@ public class KeyCode : MonoBehaviour
             numTex.text = codeString;
             if (stringCharacters == 4)
             {
+                
                 if (codeString == correctCode)
                 {
                     numtext.SetActive(false);
@@ -168,25 +156,28 @@ public class KeyCode : MonoBehaviour
     public void pressedButton(int newNum)
     {
         codeString = codeString + "" + newNum;
-        stringCharacters = stringCharacters ++;
+        stringCharacters ++;
+        speaker2.resource = SFX[0];
+        speaker2.Play();
     }
     
     public void onInteract(InputAction.CallbackContext context)
     {
         
-
-        /*if (context.performed)
+       if (interactable)
         {
-        */
-         Debug.Log("beep");
-         doorcode.SetActive(true);
+            doorcode.SetActive(true);
 
-         playerscript.enabled = false;
-         dooractive = true;
-         Cursor.visible = true;
-         Cursor.lockState = CursorLockMode.None;
-         interactable = false;
-        //}
+            playerscript.enabled = false;
+            dooractive = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            interactable = false;
+            
+        }
+        
+         
+        
         
 
     }
