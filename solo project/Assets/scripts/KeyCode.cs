@@ -25,7 +25,7 @@ public class KeyCode : MonoBehaviour
 
     public AudioClip[] SFX;
 
-    public AudioSource speaker2;
+    public AudioSource speakerKP;
 
     void OnTriggerStay(Collider other)
     {
@@ -54,7 +54,7 @@ public class KeyCode : MonoBehaviour
         
         if (dooractive == true)
         {
-            exit.SetActive (false);
+            
             if (Input.GetKeyDown(UnityEngine.KeyCode.Escape))
             {
                 numtext.SetActive(true);
@@ -86,6 +86,7 @@ public class KeyCode : MonoBehaviour
                 
                 if (codeString == correctCode)
                 {
+                    exit.SetActive(false);
                     numtext.SetActive(false);
                     correcttext.SetActive(true);
                     but1.interactable = false;
@@ -99,6 +100,8 @@ public class KeyCode : MonoBehaviour
                     but9.interactable = false;
                     but0.interactable = false;
                     codeDone = true;
+                    speakerKP.resource = SFX[1];
+                    speakerKP.Play();
                     if (token == 0)
                     {
                         StartCoroutine(endSesh());
@@ -119,11 +122,15 @@ public class KeyCode : MonoBehaviour
                     but8.interactable = false;
                     but9.interactable = false;
                     but0.interactable = false;
+                    speakerKP.resource = SFX[2];
+                    speakerKP.Play();
                     if (token == 0)
                     {
                         StartCoroutine(endSesh());
                         token = 1;
+
                     }
+                    
                 }
             }
         }
@@ -157,8 +164,8 @@ public class KeyCode : MonoBehaviour
     {
         codeString = codeString + "" + newNum;
         stringCharacters ++;
-        speaker2.resource = SFX[0];
-        speaker2.Play();
+       speakerKP.resource = SFX[0];
+       speakerKP.Play();
     }
     
     public void onInteract(InputAction.CallbackContext context)
