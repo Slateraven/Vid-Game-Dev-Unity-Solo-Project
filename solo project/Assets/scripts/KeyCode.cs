@@ -1,8 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //EMBRACE THE VOID NERDS
 
@@ -26,6 +27,8 @@ public class KeyCode : MonoBehaviour
     public AudioClip[] SFX;
 
     public AudioSource speakerKP;
+
+    private bool soundPlayed = false;
 
     void OnTriggerStay(Collider other)
     {
@@ -100,8 +103,9 @@ public class KeyCode : MonoBehaviour
                     but9.interactable = false;
                     but0.interactable = false;
                     codeDone = true;
-                    speakerKP.resource = SFX[1];
-                    speakerKP.Play();
+                    speakerKP.PlayOneShot(SFX[1]); 
+                    
+                    
                     if (token == 0)
                     {
                         StartCoroutine(endSesh());
