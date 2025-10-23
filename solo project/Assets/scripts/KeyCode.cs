@@ -28,7 +28,6 @@ public class KeyCode : MonoBehaviour
 
     public AudioSource speakerKP;
 
-    private bool soundPlayed = false;
 
     void OnTriggerStay(Collider other)
     {
