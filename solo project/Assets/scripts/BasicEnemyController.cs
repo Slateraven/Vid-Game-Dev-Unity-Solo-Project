@@ -39,7 +39,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "proj")
         {
-            print("I'm Hit");
+          
             health--;
             Destroy(collision.gameObject);
         }
