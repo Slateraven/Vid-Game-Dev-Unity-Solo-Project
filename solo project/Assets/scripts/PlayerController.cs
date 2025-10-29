@@ -184,15 +184,29 @@ public class PlayerController : MonoBehaviour
         inputX = InputAxis.x;
         inputY = InputAxis.y;
         speakerWalk.resource = SFX[0];
-        if (inputX ==0 && inputY == 0)
+        if (inputX == 0 && inputY == 0)
         {
             speakerWalk.loop = false;
+            speakerWalk.Stop();
         }
         else
-        speakerWalk.loop = true;
-        speakerWalk.Play();
+        {
+            speakerWalk.loop = true;
+            speakerWalk.Play();
+        }
 
-
+        /* if (grounded == false)
+        {
+            speakerWalk.loop = false;
+            speakerWalk.Stop();
+        }
+        else
+        {
+            speakerWalk.loop = true; 
+            speakerWalk.Play();
+        }
+        */
+      
     }
     public void Jump(InputAction.CallbackContext phase)
     {
