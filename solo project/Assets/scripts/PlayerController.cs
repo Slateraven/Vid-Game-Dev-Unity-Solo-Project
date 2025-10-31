@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log(":,(");
+        
 
         Vector2 InputAxis = context.ReadValue<Vector2>();
 
