@@ -47,13 +47,10 @@ public class KeyCode : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-       
-    }
+   
     void Update()
     {
-        
+
         if (dooractive == true)
         {
             
@@ -173,7 +170,7 @@ public class KeyCode : MonoBehaviour
     
     public void onInteract(InputAction.CallbackContext context)
     {
-        
+        Debug.Log("fsdfffsef");
        if (interactable)
         {
             doorcode.SetActive(true);
@@ -183,13 +180,10 @@ public class KeyCode : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             interactable = false;
+
             
         }
         
-         
-        
-        
-
     }
 
 }

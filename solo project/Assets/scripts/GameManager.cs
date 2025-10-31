@@ -49,9 +49,11 @@ public class GameManager : MonoBehaviour
         {
             speaker.resource = menu;
             speaker.Play();
+
         }
 
-       
+        Debug.Log(speaker.resource);
+
     }
 
     // Update is called once per frame
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
         }
 
         else
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         LoadLevel(0);
+
         
     }
     public void QuitGame()
