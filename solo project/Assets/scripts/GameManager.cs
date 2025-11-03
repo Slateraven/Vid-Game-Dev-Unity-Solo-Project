@@ -111,8 +111,8 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         LoadLevel(0);
+        AudioListener.pause = false;
 
-        
     }
     public void QuitGame()
     {

@@ -170,7 +170,7 @@ public class KeyCode : MonoBehaviour
     
     public void onInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("fsdfffsef");
+        
        if (interactable)
         {
             doorcode.SetActive(true);
